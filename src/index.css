@@ -1,0 +1,8 @@
+.container-opacity {
+  background-color: rgba(0, 0, 0, 0.55);
+  max-width: 80%;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
