@@ -1,10 +1,19 @@
-import GlobalContext from "./context/GlobalContext";
+// GlobalProvider
+import GlobalProvider from './context/GlobalContext'
 
+import Header from './components/Header';
 function App() {
   return (
-    <GlobalContext>
-      <div>test</div>
-    </GlobalContext>
+
+    <GlobalProvider>
+    
+      <div>
+        
+        <Header/>
+
+      </div>
+    
+    </GlobalProvider>
   );
 }
 
