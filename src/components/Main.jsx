@@ -1,3 +1,4 @@
+import CardFilms from "./mainComponents/CardFilms";
 
 export default function Main() {
     
@@ -5,7 +6,8 @@ export default function Main() {
         
         <main>
             <section>
-                
+                ciao Main
+                <CardFilms/>
             </section>
         
         </main>
