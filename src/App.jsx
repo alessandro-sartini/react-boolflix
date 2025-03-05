@@ -1,5 +1,5 @@
 // GlobalProvider
-import GlobalProvider from './context/GlobalContext'
+import {GlobalProvider} from './context/GlobalContext'
 
 import Header from './components/Header';
 import Main from './components/Main';
@@ -13,7 +13,7 @@ function App() {
         <Header/>
         <Main />
         
-        
+
       </div>
     
     </GlobalProvider>
