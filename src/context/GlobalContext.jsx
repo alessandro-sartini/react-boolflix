@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
 const GlobalContext = createContext();
+  const linkImg = import.meta.env.VITE_IMG_LINK;
 
 const GlobalProvider = ({ children }) => {
   const [searchFilm, setSearchFilms] = useState("");
@@ -9,8 +10,8 @@ const GlobalProvider = ({ children }) => {
   //   console.log(searchFilm);
 
   function handleInputChange(e) {
-        setSearchFilms(e.target.value);
-        setSearchTV(e.target.value); 
+    setSearchFilms(e.target.value);
+    setSearchTV(e.target.value);
   }
 
   // Gestisce la submission del form
@@ -20,8 +21,8 @@ const GlobalProvider = ({ children }) => {
     handleData();
   }
 
-    const [films, setFilms] = useState([]);
-    const [tvShows, setTVShows] = useState([]);
+  const [films, setFilms] = useState([]);
+  const [tvShows, setTVShows] = useState([]);
 
   const apiUrl = import.meta.env.VITE_API_URL;
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -36,22 +37,20 @@ const GlobalProvider = ({ children }) => {
 
   function handleData() {
     fetch(
-        (apiUrl + `movie?query=${searchFilm}&include_adult=false&elanguage=it-IT`)
-        // &&
-        // (apiUrl + `tv?query=${searchTV}&include_adult=false&elanguage=it-IT`)
-
-        ,
+      apiUrl + `movie?query=${searchFilm}&include_adult=false&elanguage=it-IT`,
+      // &&
+      // (apiUrl + `tv?query=${searchTV}&include_adult=false&elanguage=it-IT`)
       options
     )
       .then((res) => res.json())
       .then((data) => {
-          // console.log(data);
+        // console.log(data);
         //   setSearchTV(data.results);
         setFilms(data.results);
       })
-          .catch((err) => console.error(err));
-      
-      fetch(
+      .catch((err) => console.error(err));
+
+    fetch(
       `${apiUrl}tv?query=${searchTV}&include_adult=false&language=it-IT`,
       options
     )
@@ -62,7 +61,7 @@ const GlobalProvider = ({ children }) => {
       .catch((err) => console.error("Errore TV:", err));
   }
 
- const value = {
+  const value = {
     searchFilm,
     setSearchFilms,
     searchTV,
@@ -72,6 +71,7 @@ const GlobalProvider = ({ children }) => {
     handleData,
     handleSubmit,
     handleInputChange,
+    linkImg
   };
 
   return (
