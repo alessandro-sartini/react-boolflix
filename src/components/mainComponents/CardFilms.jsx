@@ -13,8 +13,12 @@ function reatingStar(valutazione) {
   const StampStarFull = fullStar.repeat(numeroDiStelle);
   const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
 
+  
+  const isHighRating = numeroDiStelle > 3;
+
+
   return (
-    <span>
+    <span className={isHighRating? "gold":"silver"}>
       {StampStarFull}
       {stampStarEmpty}
     </span>

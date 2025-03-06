@@ -5,13 +5,13 @@ const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [searchFilm, setSearchFilms] = useState("");
-  const [searchTV, setSearchTV] = useState("");
+  // const [searchTV, setSearchTV] = useState("");
 
   //   console.log(searchFilm);
 
   function handleInputChange(e) {
     setSearchFilms(e.target.value);
-    setSearchTV(e.target.value);
+    // setSearchTV(e.target.value);
   }
 
   // Gestisce la submission del form
@@ -51,7 +51,7 @@ const GlobalProvider = ({ children }) => {
       .catch((err) => console.error(err));
 
     fetch(
-      `${apiUrl}tv?query=${searchTV}&include_adult=false&language=it-IT`,
+      `${apiUrl}tv?query=${searchFilm}&include_adult=false&language=it-IT`,
       options
     )
       .then((res) => res.json())
@@ -64,8 +64,8 @@ const GlobalProvider = ({ children }) => {
   const value = {
     searchFilm,
     setSearchFilms,
-    searchTV,
-    setSearchTV,
+    // searchTV,
+    // setSearchTV,
     films,
     tvShows,
     handleData,
