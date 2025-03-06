@@ -5,6 +5,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+h5{
+  max-width: 80%;
 }
 .custom-input {
   max-width: 30%;

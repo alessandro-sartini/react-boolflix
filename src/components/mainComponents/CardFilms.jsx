@@ -1,32 +1,33 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../../context/GlobalContext";
 
-function reatingStar(valutazione) {
-  // const fullStar = <i class="fa-solid fa-star"></i>;
-  // const emptyStar = <i class="fa-regular fa-star"></i>;
+// function reatingStar(valutazione) {
+//   // const fullStar = <i class="fa-solid fa-star"></i>;
+//   // const emptyStar = <i class="fa-regular fa-star"></i>;
 
-  // const star= [fullStar, emptyStar]
-  const fullStar = "★";
-  const emptyStar = "☆";
+//   // const star= [fullStar, emptyStar]
+//   const fullStar = "★";
+//   const emptyStar = "☆";
 
-  const numeroDiStelle = Math.round(valutazione / 2);
-  const StampStarFull = fullStar.repeat(numeroDiStelle);
-  const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
+//   const numeroDiStelle = Math.round(valutazione / 2);
+//   const StampStarFull = fullStar.repeat(numeroDiStelle);
+//   const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
 
   
-  const isHighRating = numeroDiStelle > 3;
+//   const isHighRating = numeroDiStelle > 3;
 
 
-  return (
-    <span className={isHighRating? "gold":"silver"}>
-      {StampStarFull}
-      {stampStarEmpty}
-    </span>
-  );
-}
+//   return (
+//     <span className={isHighRating? "gold":"silver"}>
+//       {StampStarFull}
+//       {stampStarEmpty}
+//     </span>
+//   );
+// }
 
 export default function CardFilms() {
-  const { films, handleData, linkImg } = useGlobalContext();
+
+  const { films, handleData, linkImg,reatingStar } = useGlobalContext();
 
   useEffect(() => {
     handleData();
@@ -47,19 +48,23 @@ export default function CardFilms() {
                     alt={film.title}
                   />
                   <div
-                    className="container-opacity position-absolute
+                    className="
+                    container-opacity 
+                    position-absolute
                     bottom-0
                     start-50
                     translate-middle-x
-                    rounded-pill"
+                    rounded-pill
+                    "
                   >
                     <h5
                       className="
                       card-title
                       text-white
                       text-truncate
-                      p-3
-                      m-0"
+                      p-1
+                      m-0
+                      "
                       style={{ zIndex: 1 }}
                     >
                       {film.title}

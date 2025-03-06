@@ -1,8 +1,10 @@
 import { createContext, useContext, useState } from "react";
 
 const GlobalContext = createContext();
-  const linkImg = import.meta.env.VITE_IMG_LINK;
+const linkImg = import.meta.env.VITE_IMG_LINK;
 
+const apiUrl = import.meta.env.VITE_API_URL;
+const apiKey = import.meta.env.VITE_API_KEY;
 const GlobalProvider = ({ children }) => {
   const [searchFilm, setSearchFilms] = useState("");
   // const [searchTV, setSearchTV] = useState("");
@@ -24,9 +26,7 @@ const GlobalProvider = ({ children }) => {
   const [films, setFilms] = useState([]);
   const [tvShows, setTVShows] = useState([]);
 
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const apiKey = import.meta.env.VITE_API_KEY;
-
+  // ! oggetto per la chiamta dato da imdb
   const options = {
     method: "GET",
     headers: {
@@ -34,6 +34,8 @@ const GlobalProvider = ({ children }) => {
       Authorization: `Bearer ${apiKey}`,
     },
   };
+
+  // ! chaimat fetch per film e tvShow
 
   function handleData() {
     fetch(
@@ -61,9 +63,39 @@ const GlobalProvider = ({ children }) => {
       .catch((err) => console.error("Errore TV:", err));
   }
 
+
+  //todo funzione valutazione in stelle 
+
+  function reatingStar(valutazione) {
+  // const fullStar = <i class="fa-solid fa-star"></i>;
+  // const emptyStar = <i class="fa-regular fa-star"></i>;
+
+  // const star= [fullStar, emptyStar]
+  const fullStar = "★";
+  const emptyStar = "☆";
+
+  const numeroDiStelle = Math.round(valutazione / 2);
+  const StampStarFull = fullStar.repeat(numeroDiStelle);
+  const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
+
+  
+  const isHighRating = numeroDiStelle > 3;
+
+
+  return (
+    <span className={isHighRating? "gold":"silver"}>
+      {StampStarFull}
+      {stampStarEmpty}
+    </span>
+  );
+}
+
+
+
   const value = {
     searchFilm,
     setSearchFilms,
+    reatingStar,
     // searchTV,
     // setSearchTV,
     films,
@@ -71,7 +103,7 @@ const GlobalProvider = ({ children }) => {
     handleData,
     handleSubmit,
     handleInputChange,
-    linkImg
+    linkImg,
   };
 
   return (

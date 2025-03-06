@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useGlobalContext } from "../../context/GlobalContext";
 
 export default function CardTvSeries() {
-  const { tvShows, handleData, linkImg } = useGlobalContext();
+  const { tvShows, handleData, linkImg, reatingStar } = useGlobalContext();
 
   useEffect(() => {
     handleData();
@@ -43,7 +43,11 @@ export default function CardTvSeries() {
                     style={{ zIndex: 1 }}
                   >
                     {tvShow.name}
-                  </h5>
+                    </h5>
+                    <label className="p-2">
+                    {/* <label className={"p-2" + (stampStarEmpty + StampStarFull > 3 ? 'active' : "")}> */}
+                      {reatingStar(tvShow.vote_average)}
+                    </label>
                 </div>
                 </div>
               </div>
