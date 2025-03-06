@@ -17,38 +17,68 @@ export default function CardTvSeries() {
           <h1 className="mt-2 mb-4">serie tv</h1>
           <div className="row row-cols-md-3 row-cols-lg-4">
             {tvShows.map((tvShow) => (
-              <div className=" mb-4" key={tvShow.id}>
-                <div className="card h-100 position-relative">
+              <div className="mb-4 card-container" key={tvShow.id}>
+                <div className="card h-100 empty-card">
+                  <div
+                    className="
+                  container 
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  flex-column"
+                  >
+                    <h5 className="m-2">{tvShow.title}</h5>
+                    <h6 className="card-subtitle m-2 text-muted">
+                      titolo originale: {tvShow.original_title}
+                    </h6>
+                    <span className="trama">trama: {tvShow.overview}</span>
+
+                    <span
+                      className={`my-3 fi fi-${
+                        tvShow.original_language == "en"
+                          ? "gb"
+                          : tvShow.original_language == "ja"
+                          ? "jp"
+                          : tvShow.original_language
+                      }`}
+                    >
+                      
+                    </span>
+                  </div>
+                </div>
+
+                <div className="card h-100 full-card">
                   <img
                     src={`${linkImg}w500${tvShow.poster_path}`}
                     className="card-img-top"
-                    alt={tvShow.name}
+                    alt={tvShow.title}
                   />
-                    <div
-                  className="container-opacity position-absolute 
+                  <div
+                    className="
+                    container-opacity 
+                    position-absolute
                     bottom-0
-                    start-50 
+                    start-50
                     translate-middle-x
                     rounded-pill
-                    "
-                >
-                  <h5
-                    className="
-                    card-title
-                    text-white 
-                   
-                    text-truncate 
-                    p-3
-                    m-0"
-                    style={{ zIndex: 1 }}
+                  "
                   >
-                    {tvShow.name}
+                    <h5
+                      className="
+                      card-title
+                      text-white
+                      text-truncate
+                      p-1
+                      m-0
+                    "
+                      style={{ zIndex: 1 }}
+                    >
+                      {tvShow.title}
                     </h5>
                     <label className="p-2">
-                    {/* <label className={"p-2" + (stampStarEmpty + StampStarFull > 3 ? 'active' : "")}> */}
                       {reatingStar(tvShow.vote_average)}
                     </label>
-                </div>
+                  </div>
                 </div>
               </div>
             ))}

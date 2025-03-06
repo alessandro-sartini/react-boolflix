@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 export default function Header() {
   const { handleSubmit, handleInputChange } = useGlobalContext();
@@ -8,7 +8,7 @@ export default function Header() {
       <div className="container-fluid  sticky">
         <div className="row align-items-center ">
           <div className="col-md-3">
-            <h1 className="text-danger fs-1">Boolix</h1>
+            <h1 className="text-danger fs-1"><a className="text-danger " href="#">Boolix</a></h1>
           </div>
           <div className="col-md-9">
             <form

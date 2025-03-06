@@ -65,7 +65,8 @@ const GlobalProvider = ({ children }) => {
 
   //! Funzione che trasforma una valutazione numerica in stelle visive
   // Converte un voto in un sistema a 5 stelle
-  function reatingStar(valutazione) { // 'valutazione' è il voto da convertire
+  function reatingStar(valutazione) {
+    // 'valutazione' è il voto da convertire
     const fullStar = "★"; // Simbolo per stella piena
     const emptyStar = "☆"; // Simbolo per stella vuota
 
@@ -77,7 +78,7 @@ const GlobalProvider = ({ children }) => {
 
     // Restituisce un elemento JSX con le stelle, applicando una classe CSS in base al rating
     return (
-      <span className={isHighRating ? "gold" : "silver"}> 
+      <span className={isHighRating ? "gold" : "silver"}>
         {StampStarFull} {/* Stelle piene */}
         {stampStarEmpty} {/* Stelle vuote */}
       </span>

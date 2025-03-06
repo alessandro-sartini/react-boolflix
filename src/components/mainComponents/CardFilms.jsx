@@ -39,7 +39,8 @@ export default function CardFilms() {
             {films.map((film) => (
               <div className="mb-4 card-container" key={film.id}>
                 <div className="card h-100 empty-card">
-                  <div className="
+                  <div
+                    className="
                   container 
                   d-flex
                   justify-content-center
@@ -48,13 +49,22 @@ export default function CardFilms() {
                   >
                     <h5 className="m-2">{film.title}</h5>
                     <h6 className="card-subtitle m-2 text-muted">
-                      titolo originale:{film.original_title}
+                      titolo originale: {film.original_title}
                     </h6>
-                    <span>
-                      trama:{film.overview}
+                    <span className="trama">trama: {film.overview}</span>
+
+                    <span
+                      className={`my-3 fi fi-${
+                        film.original_language == "en"
+                          ? "gb"
+                          : film.original_language == "ja"
+                          ? "jp"
+                          : film.original_language
+                      }`}
+                    >
+                      
                     </span>
                   </div>
-                  
                 </div>
 
                 <div className="card h-100 full-card">
