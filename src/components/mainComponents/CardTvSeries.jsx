@@ -27,9 +27,9 @@ export default function CardTvSeries() {
                   align-items-center
                   flex-column"
                   >
-                    <h5 className="m-2">{tvShow.title}</h5>
+                    <h5 className="m-2 my-3 text-danger">{tvShow.name}</h5>
                     <h6 className="card-subtitle m-2 text-muted">
-                      titolo originale: {tvShow.original_title}
+                      titolo originale: {tvShow.original_name}
                     </h6>
                     <span className="trama">trama: {tvShow.overview}</span>
 
@@ -51,7 +51,7 @@ export default function CardTvSeries() {
                   <img
                     src={`${linkImg}w500${tvShow.poster_path}`}
                     className="card-img-top"
-                    alt={tvShow.title}
+                    alt={tvShow.name}
                   />
                   <div
                     className="
@@ -73,7 +73,7 @@ export default function CardTvSeries() {
                     "
                       style={{ zIndex: 1 }}
                     >
-                      {tvShow.title}
+                      {tvShow.name}
                     </h5>
                     <label className="p-2">
                       {reatingStar(tvShow.vote_average)}

@@ -47,8 +47,8 @@ export default function CardFilms() {
                   align-items-center
                   flex-column"
                   >
-                    <h5 className="m-2">{film.title}</h5>
-                    <h6 className="card-subtitle m-2 text-muted">
+                    <h5 className="m-2 my-3 text-danger">{film.title}</h5>
+                    <h6 className="m-2 text-muted">
                       titolo originale: {film.original_title}
                     </h6>
                     <span className="trama">trama: {film.overview}</span>
