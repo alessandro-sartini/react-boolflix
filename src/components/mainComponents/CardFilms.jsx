@@ -13,9 +13,7 @@ import { useGlobalContext } from "../../context/GlobalContext";
 //   const StampStarFull = fullStar.repeat(numeroDiStelle);
 //   const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
 
-  
 //   const isHighRating = numeroDiStelle > 3;
-
 
 //   return (
 //     <span className={isHighRating? "gold":"silver"}>
@@ -26,8 +24,7 @@ import { useGlobalContext } from "../../context/GlobalContext";
 // }
 
 export default function CardFilms() {
-
-  const { films, handleData, linkImg,reatingStar } = useGlobalContext();
+  const { films, handleData, linkImg, reatingStar } = useGlobalContext();
 
   useEffect(() => {
     handleData();
@@ -40,8 +37,27 @@ export default function CardFilms() {
           <h1 className="mt-2 mb-4">film</h1>
           <div className="row row-cols-md-3 row-cols-lg-4">
             {films.map((film) => (
-              <div className="mb-4" key={film.id}>
-                <div className="card h-100 position-relative">
+              <div className="mb-4 card-container" key={film.id}>
+                <div className="card h-100 empty-card">
+                  <div className="
+                  container 
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  flex-column"
+                  >
+                    <h5 className="m-2">{film.title}</h5>
+                    <h6 className="card-subtitle m-2 text-muted">
+                      titolo originale:{film.original_title}
+                    </h6>
+                    <span>
+                      trama:{film.overview}
+                    </span>
+                  </div>
+                  
+                </div>
+
+                <div className="card h-100 full-card">
                   <img
                     src={`${linkImg}w500${film.poster_path}`}
                     className="card-img-top"
@@ -55,7 +71,7 @@ export default function CardFilms() {
                     start-50
                     translate-middle-x
                     rounded-pill
-                    "
+                  "
                   >
                     <h5
                       className="
@@ -64,13 +80,12 @@ export default function CardFilms() {
                       text-truncate
                       p-1
                       m-0
-                      "
+                    "
                       style={{ zIndex: 1 }}
                     >
                       {film.title}
                     </h5>
-                      <label className="p-2">
-                    {/* <label className={"p-2" + (stampStarEmpty + StampStarFull > 3 ? 'active' : "")}> */}
+                    <label className="p-2">
                       {reatingStar(film.vote_average)}
                     </label>
                   </div>
