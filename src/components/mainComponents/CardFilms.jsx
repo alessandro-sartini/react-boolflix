@@ -1,6 +1,26 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../../context/GlobalContext";
 
+function reatingStar(valutazione) {
+  // const fullStar = <i class="fa-solid fa-star"></i>;
+  // const emptyStar = <i class="fa-regular fa-star"></i>;
+
+  // const star= [fullStar, emptyStar]
+  const fullStar = "★";
+  const emptyStar = "☆";
+
+  const numeroDiStelle = Math.round(valutazione / 2);
+  const StampStarFull = fullStar.repeat(numeroDiStelle);
+  const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
+
+  return (
+    <span>
+      {StampStarFull}
+      {stampStarEmpty}
+    </span>
+  );
+}
+
 export default function CardFilms() {
   const { films, handleData, linkImg } = useGlobalContext();
 
@@ -9,45 +29,49 @@ export default function CardFilms() {
   }, []);
 
   return (
-    <>
-      <h1 className="mt-2 mb-4">film</h1>
-      <div className="row row-cols-md-3 row-cols-lg-4">
-        {films.map((film) => (
-          <>
-            <div className=" mb-4" key={film.id}>
-              <div className="card h-100 position-relative">
-                <img
-                  src={`${linkImg}w500${film.poster_path}`}
-                  className="card-img"
-                  alt={film.title}
-                />
-                <div
-                  className="container-opacity position-absolute 
+    <div>
+      {films.length === 0 ? null : (
+        <>
+          <h1 className="mt-2 mb-4">film</h1>
+          <div className="row row-cols-md-3 row-cols-lg-4">
+            {films.map((film) => (
+              <div className="mb-4" key={film.id}>
+                <div className="card h-100 position-relative">
+                  <img
+                    src={`${linkImg}w500${film.poster_path}`}
+                    className="card-img-top"
+                    alt={film.title}
+                  />
+                  <div
+                    className="container-opacity position-absolute
                     bottom-0
-                    start-50 
+                    start-50
                     translate-middle-x
-                    rounded-pill
-                    "
-                >
-                  <h5
-                    className="
-                    card-title
-                    text-white 
-                    
-                    text-truncate 
-                    p-3
-                    m-0"
-                    style={{ zIndex: 1 }}
+                    rounded-pill"
                   >
-                    {film.title}
-                  </h5>
+                    <h5
+                      className="
+                      card-title
+                      text-white
+                      text-truncate
+                      p-3
+                      m-0"
+                      style={{ zIndex: 1 }}
+                    >
+                      {film.title}
+                    </h5>
+                      <label className="p-2">
+                    {/* <label className={"p-2" + (stampStarEmpty + StampStarFull > 3 ? 'active' : "")}> */}
+                      {reatingStar(film.vote_average)}
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        ))}
-      </div>
-    </>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 //   const [films, setFilms] = useState([]);

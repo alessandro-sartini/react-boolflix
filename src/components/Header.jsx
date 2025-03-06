@@ -5,7 +5,7 @@ export default function Header() {
 
   return (
     <header>
-      <div className="container-fluid mt-2">
+      <div className="container-fluid  sticky">
         <div className="row align-items-center ">
           <div className="col-md-3">
             <h1 className="text-danger fs-1">Boolix</h1>
