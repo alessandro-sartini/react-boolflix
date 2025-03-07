@@ -43,7 +43,9 @@ span.silver {
 
 .empty-card {
   width: 100%;
-  height: 100%;
+  /* max-height: 98%; */
+  
+  /* min-height: 514px; */
   display: none;
   background-color: #343a40;
 }
@@ -57,8 +59,7 @@ span.silver {
 }
 h6 {
   margin-top: 1em;
-
-  font-size: 0.8rem;
+  font-size: 0.3rem;
 }
 .trama {
   margin-top: 1em;
@@ -67,7 +68,7 @@ h6 {
   max-width: 90%;
   /* max-height:15%; */
   /* width: 300px;  */
-  height: 10em;
+  max-height: 7em;
   overflow: auto;
   padding: 10px;
   margin-bottom: 1em;
