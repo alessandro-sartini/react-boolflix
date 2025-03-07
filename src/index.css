@@ -1,4 +1,11 @@
-h1 a{
+header.shadow {
+  position: sticky;
+  top: 0;
+  box-shadow: 0px 5px 30px rgba(233, 61, 61, 0.6) !important;
+  z-index: 2;
+}
+
+h1 a {
   text-decoration: none;
 }
 .container-opacity {
@@ -44,7 +51,7 @@ span.silver {
 .empty-card {
   width: 100%;
   /* max-height: 98%; */
-  
+
   /* min-height: 514px; */
   display: none;
   background-color: #343a40;
@@ -56,6 +63,7 @@ span.silver {
 
 .card-container:hover .empty-card {
   display: block;
+  
 }
 h6 {
   margin-top: 1em;
@@ -65,10 +73,10 @@ h6 {
   margin-top: 1em;
   /* max-height:0.5em;  */
   /* overflow-y: auto;  */
-  max-width: 90%;
+  /* max-width: 100%; */
   /* max-height:15%; */
   /* width: 300px;  */
-  max-height: 7em;
+  max-height: 11em;
   overflow: auto;
   padding: 10px;
   margin-bottom: 1em;
@@ -77,5 +85,5 @@ h6 {
   width: 24px;
 } */
 .empty-card h5 {
-    color: #c52929;
+  color: #c52929;
 }

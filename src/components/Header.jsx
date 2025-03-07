@@ -3,12 +3,15 @@ import { useGlobalContext } from "../context/GlobalContext";
 export default function Header() {
   const { handleSubmit, handleInputChange } = useGlobalContext();
 
+  
   return (
-    <header>
-      <div className="container-fluid  sticky">
+
+    
+    <header className="shadow bg-dark ">
+      <div className="container-fluid">
         <div className="row align-items-center ">
           <div className="col-md-3">
-            <h1 className="text-danger fs-1"><a className="text-danger " href="#">Boolix</a></h1>
+            <h1 className="text-danger fs-1 p-2"><a className="text-danger " href="#">Boolix</a></h1>
           </div>
           <div className="col-md-9">
             <form

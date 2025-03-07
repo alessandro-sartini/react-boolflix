@@ -17,13 +17,13 @@ export default function Card({ data, type }) {
             align-items-center
             flex-column"
         >
-          <h5 className="m-2 my-3 text-danger">{title}</h5>
+          <h5 className="m-2 my-2 text-danger">{title}</h5>
           <h6 className="card-subtitle m-2 text-muted">
             titolo originale: {originalTitle}
           </h6>
           <span className="trama">trama: {data.overview}</span>
           <span
-            className={`my-3 fi fi-${
+            className={`my-1 fi fi-${
               data.original_language === "en"
                 ? "gb"
                 : data.original_language === "ja"
