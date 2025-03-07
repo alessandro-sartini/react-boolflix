@@ -1,34 +1,23 @@
 import { createContext, useContext, useState } from "react";
 
+// Creazione del contesto globale per condividere lo stato tra i componenti
 const GlobalContext = createContext();
-const linkImg = import.meta.env.VITE_IMG_LINK;
 
+// Variabili d'ambiente per configurare l'URL dell'API, la chiave API e il link per le immagini
+const linkImg = import.meta.env.VITE_IMG_LINK;
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiKey = import.meta.env.VITE_API_KEY;
 
+// Definizione del provider del contesto globale, che avvolge i componenti figli
 const GlobalProvider = ({ children }) => {
+  // Stato per memorizzare il termine di ricerca inserito dall'utente
   const [searchFilm, setSearchFilms] = useState("");
-  // const [searchTV, setSearchTV] = useState("");
-
-  // Funzione che gestisce il cambiamento dell'input dell'utente
-  // Aggiorna lo stato 'searchFilm' con il valore digitato dall'utente
-  function handleInputChange(e) {
-    setSearchFilms(e.target.value); // Imposta il valore dell'input nello stato
-    // setSearchTV(e.target.value); // Commentato: servirebbe per una ricerca TV separata
-  }
-
-  // Funzione che gestisce l'invio del form
-  // Previene il comportamento di default del form (ricaricamento pagina)
-  // Stampa in console il termine di ricerca e chiama handleData per fetch dei dati
-  function handleSubmit(e) {
-    e.preventDefault(); // Impedisce il refresh della pagina
-    console.log("Ricerca per:", searchFilm); // Mostra il termine cercato
-    handleData(); // Avvia la funzione per recuperare i dati
-  }
-
+  // Stato per memorizzare la lista dei film ottenuti dalla ricerca
   const [films, setFilms] = useState([]);
+  // Stato per memorizzare la lista delle serie TV ottenute dalla ricerca
   const [tvShows, setTVShows] = useState([]);
 
+  // Opzioni per le richieste fetch, con metodo GET e intestazioni per autenticazione
   const options = {
     method: "GET",
     headers: {
@@ -37,58 +26,63 @@ const GlobalProvider = ({ children }) => {
     },
   };
 
-  // Funzione che effettua le chiamate API per ottenere film e serie TV
-  // Usa fetch per interrogare due endpoint separati: uno per film e uno per serie TV
-  function handleData() {
-    // Prima chiamata fetch per i film
-    fetch(
-      apiUrl + `movie?query=${searchFilm}&include_adult=false&elanguage=it-IT`, // Costruisce l'URL con il termine di ricerca
-      options // Opzioni della richiesta con metodo GET e header di autorizzazione
-    )
-      .then((res) => res.json()) // Converte la risposta in JSON
-      .then((data) => {
-        setFilms(data.results); // Aggiorna lo stato 'films' con i risultati
-      })
-      .catch((err) => console.error(err)); // Gestisce eventuali errori loggandoli
-
-    // Seconda chiamata fetch per le serie TV
-    fetch(
-      `${apiUrl}tv?query=${searchFilm}&include_adult=false&language=it-IT`, // URL per le serie TV
-      options // Stesse opzioni della richiesta precedente
-    )
-      .then((res) => res.json()) // Converte la risposta in JSON
-      .then((data) => {
-        setTVShows(data.results); // Aggiorna lo stato 'tvShows' con i risultati
-      })
-      .catch((err) => console.error("Errore TV:", err)); // Gestisce errori specifici per le serie TV
+  // Funzione per aggiornare lo stato del termine di ricerca quando l'utente digita
+  function handleInputChange(e) {
+    setSearchFilms(e.target.value); // Imposta il valore dell'input nello stato
   }
 
-  //! Funzione che trasforma una valutazione numerica in stelle visive
-  // Converte un voto in un sistema a 5 stelle
-  function reatingStar(valutazione) {
-    // 'valutazione' è il voto da convertire
-    const fullStar = "★"; // Simbolo per stella piena
-    const emptyStar = "☆"; // Simbolo per stella vuota
+  // Funzione per gestire l'invio del form di ricerca
+  function handleSubmit(e) {
+    e.preventDefault(); // Impedisce il ricaricamento della pagina
+    console.log("Ricerca per:", searchFilm); // Stampa il termine di ricerca nella console
+    handleData(); // Chiama la funzione per recuperare i dati
+  }
 
-    const numeroDiStelle = Math.round(valutazione / 2); // Divide il voto per 2 e arrotonda (es. 7/2 = 3.5 -> 4 stelle)
-    const StampStarFull = fullStar.repeat(numeroDiStelle); // Ripete la stella piena per il numero calcolato
-    const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle); // Riempie il resto fino a 5 con stelle vuote
+  // Funzione per effettuare le richieste API e aggiornare gli stati di film e serie TV
+  function handleData() {
+    // Richiesta per i film basata sul termine di ricerca
+    fetch(
+      `${apiUrl}movie?query=${searchFilm}&include_adult=false&language=it-IT`,
+      options
+    )
+      .then((res) => res.json()) 
+      .then((data) => setFilms(data.results))
+      .catch((err) => console.error(err)); 
 
-    const isHighRating = numeroDiStelle > 3; // Controlla se il rating è alto (> 3 stelle)
+    // Richiesta per le serie TV basata sul termine di ricerca
+    fetch(
+      `${apiUrl}tv?query=${searchFilm}&include_adult=false&language=it-IT`,
+      options
+    )
+      .then((res) => res.json()) 
+      .then((data) => setTVShows(data.results))
 
-    // Restituisce un elemento JSX con le stelle, applicando una classe CSS in base al rating
+      .catch((err) => console.error("Errore TV:", err)); 
+  }
+
+  // Funzione per convertire una valutazione numerica in un sistema di stelle
+  function ratingStar(valutazione) {
+    const fullStar = "★";
+    const emptyStar = "☆";
+    const numeroDiStelle = Math.round(valutazione / 2);
+    const stampStarFull = fullStar.repeat(numeroDiStelle);
+    const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
+    const isHighRating = numeroDiStelle > 3;
+
+    // Restituisce un elemento span con le stelle e una classe CSS basata sul rating
     return (
       <span className={isHighRating ? "gold" : "silver"}>
-        {StampStarFull} {/* Stelle piene */}
-        {stampStarEmpty} {/* Stelle vuote */}
+        {stampStarFull}
+        {stampStarEmpty}
       </span>
     );
   }
 
+  // Oggetto che contiene tutti i valori e le funzioni da passare ai componenti consumatori del contesto
   const value = {
     searchFilm,
     setSearchFilms,
-    reatingStar,
+    ratingStar,
     films,
     tvShows,
     handleData,
@@ -97,11 +91,14 @@ const GlobalProvider = ({ children }) => {
     linkImg,
   };
 
+  // Ritorna il provider del contesto, passando il valore ai componenti figli
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
   );
 };
 
+// Hook personalizzato per facilitare l'accesso al contesto globale nei componenti
 const useGlobalContext = () => useContext(GlobalContext);
 
+// Esportazione del provider e dell'hook per l'uso in altri file
 export { GlobalProvider, useGlobalContext };

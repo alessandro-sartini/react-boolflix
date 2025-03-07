@@ -24,7 +24,7 @@ import { useGlobalContext } from "../../context/GlobalContext";
 // }
 
 export default function CardFilms() {
-  const { films, handleData, linkImg, reatingStar } = useGlobalContext();
+  const { films, handleData, linkImg, ratingStar } = useGlobalContext();
 
   useEffect(() => {
     handleData();
@@ -96,7 +96,7 @@ export default function CardFilms() {
                       {film.title}
                     </h5>
                     <label className="p-2">
-                      {reatingStar(film.vote_average)}
+                      {ratingStar(film.vote_average)}
                     </label>
                   </div>
                 </div>
