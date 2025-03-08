@@ -1,5 +1,8 @@
 import { createContext, useContext, useState } from "react";
 
+// ! import newTop Function
+import useTopNew from "./TopNew";
+
 // Creazione del contesto globale per condividere lo stato tra i componenti
 const GlobalContext = createContext();
 
@@ -42,22 +45,22 @@ const GlobalProvider = ({ children }) => {
   function handleData() {
     // Richiesta per i film basata sul termine di ricerca
     fetch(
-      `${apiUrl}movie?query=${searchFilm}&include_adult=false&language=it-IT`,
+      `${apiUrl}movie?query=${searchFilm}&include_adult=true&language=it-IT`,
       options
     )
-      .then((res) => res.json()) 
+      .then((res) => res.json())
       .then((data) => setFilms(data.results))
-      .catch((err) => console.error(err)); 
+      .catch((err) => console.error(err));
 
     // Richiesta per le serie TV basata sul termine di ricerca
     fetch(
-      `${apiUrl}tv?query=${searchFilm}&include_adult=false&language=it-IT`,
+      `${apiUrl}tv?query=${searchFilm}&include_adult=true&language=it-IT`,
       options
     )
-      .then((res) => res.json()) 
+      .then((res) => res.json())
       .then((data) => setTVShows(data.results))
 
-      .catch((err) => console.error("Errore TV:", err)); 
+      .catch((err) => console.error("Errore TV:", err));
   }
 
   // Funzione per convertire una valutazione numerica in un sistema di stelle
@@ -78,6 +81,8 @@ const GlobalProvider = ({ children }) => {
     );
   }
 
+  const { handleTopNew, topNewFilms, setTopNewFilms } = useTopNew();
+
   // Oggetto che contiene tutti i valori e le funzioni da passare ai componenti consumatori del contesto
   const value = {
     searchFilm,
@@ -89,6 +94,9 @@ const GlobalProvider = ({ children }) => {
     handleSubmit,
     handleInputChange,
     linkImg,
+    handleTopNew,
+    topNewFilms,
+    setTopNewFilms,
   };
 
   // Ritorna il provider del contesto, passando il valore ai componenti figli

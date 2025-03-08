@@ -1,21 +1,38 @@
-// GlobalProvider
-import {GlobalProvider} from './context/GlobalContext'
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from './components/Header';
 import Main from './components/Main';
+import DefaultLayout from './layout/DefaultLayout';
+
+// GlobalProvider
+import {GlobalProvider} from './context/GlobalContext'
+import FilmsPage from "./pages/FilmsPage";
+// import TvShowsPage from "./pages/TvShowsPage";
 function App() {
+
   return (
 
     <GlobalProvider>
-    
-      <div>
-        
-        <Header/>
-        <Main />
-        
+      <BrowserRouter>
+        <Routes>
+          
 
-      </div>
-    
+          <Route path="/" Component={DefaultLayout}>
+          
+            <Route path="/" Component={Main} />
+            <Route path="/films" element={<FilmsPage type="movies" />} />
+            {/* <Route path="/tvshows" Component={TvShowsPage} /> */}
+            
+          
+              {/* <Header/> */}
+           
+          </Route>
+         
+       
+        </Routes>
+        
+      
+      </BrowserRouter>
+     
     </GlobalProvider>
   );
 }
