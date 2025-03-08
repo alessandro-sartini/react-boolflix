@@ -1,15 +1,19 @@
 import { createContext, useContext, useState } from "react";
 
 // ! import newTop Function
-import useTopNew from "./TopNew";
+import useTopNew from "./hooks/TopNew";
+// ! import oprtions and key 
+import { options, apiUrl } from "../config/apiOptions";
+
+
+import ratingStar from "../utilities/ratingStar"
 
 // Creazione del contesto globale per condividere lo stato tra i componenti
 const GlobalContext = createContext();
 
 // Variabili d'ambiente per configurare l'URL dell'API, la chiave API e il link per le immagini
 const linkImg = import.meta.env.VITE_IMG_LINK;
-const apiUrl = import.meta.env.VITE_API_URL;
-const apiKey = import.meta.env.VITE_API_KEY;
+
 
 // Definizione del provider del contesto globale, che avvolge i componenti figli
 const GlobalProvider = ({ children }) => {
@@ -20,14 +24,7 @@ const GlobalProvider = ({ children }) => {
   // Stato per memorizzare la lista delle serie TV ottenute dalla ricerca
   const [tvShows, setTVShows] = useState([]);
 
-  // Opzioni per le richieste fetch, con metodo GET e intestazioni per autenticazione
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-  };
+
 
   // Funzione per aggiornare lo stato del termine di ricerca quando l'utente digita
   function handleInputChange(e) {
@@ -63,25 +60,8 @@ const GlobalProvider = ({ children }) => {
       .catch((err) => console.error("Errore TV:", err));
   }
 
-  // Funzione per convertire una valutazione numerica in un sistema di stelle
-  function ratingStar(valutazione) {
-    const fullStar = "★";
-    const emptyStar = "☆";
-    const numeroDiStelle = Math.round(valutazione / 2);
-    const stampStarFull = fullStar.repeat(numeroDiStelle);
-    const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
-    const isHighRating = numeroDiStelle > 3;
 
-    // Restituisce un elemento span con le stelle e una classe CSS basata sul rating
-    return (
-      <span className={isHighRating ? "gold" : "silver"}>
-        {stampStarFull}
-        {stampStarEmpty}
-      </span>
-    );
-  }
-
-  const { handleTopNew, topNewFilms, setTopNewFilms } = useTopNew();
+  const { handleTopNew, topNewProducts, setTopNewProducts } = useTopNew();
 
   // Oggetto che contiene tutti i valori e le funzioni da passare ai componenti consumatori del contesto
   const value = {
@@ -95,8 +75,8 @@ const GlobalProvider = ({ children }) => {
     handleInputChange,
     linkImg,
     handleTopNew,
-    topNewFilms,
-    setTopNewFilms,
+    topNewProducts,
+    setTopNewProducts,
   };
 
   // Ritorna il provider del contesto, passando il valore ai componenti figli
@@ -110,3 +90,20 @@ const useGlobalContext = () => useContext(GlobalContext);
 
 // Esportazione del provider e dell'hook per l'uso in altri file
 export { GlobalProvider, useGlobalContext };
+  // // Funzione per convertire una valutazione numerica in un sistema di stelle
+  // function ratingStar(valutazione) {
+  //   const fullStar = "★";
+  //   const emptyStar = "☆";
+  //   const numeroDiStelle = Math.round(valutazione / 2);
+  //   const stampStarFull = fullStar.repeat(numeroDiStelle);
+  //   const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
+  //   const isHighRating = numeroDiStelle > 3;
+
+  //   // Restituisce un elemento span con le stelle e una classe CSS basata sul rating
+  //   return (
+  //     <span className={isHighRating ? "gold" : "silver"}>
+  //       {stampStarFull}
+  //       {stampStarEmpty}
+  //     </span>
+  //   );
+  // }

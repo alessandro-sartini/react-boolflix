@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from './components/Header';
+// import Header from './components/Header';
 import Main from './components/Main';
 import DefaultLayout from './layout/DefaultLayout';
 
 // GlobalProvider
 import {GlobalProvider} from './context/GlobalContext'
 import FilmsPage from "./pages/FilmsPage";
-// import TvShowsPage from "./pages/TvShowsPage";
+import TvShowsPage from "./pages/TvShowsPage";
 function App() {
 
   return (
@@ -20,6 +20,7 @@ function App() {
           
             <Route path="/" Component={Main} />
             <Route path="/films" element={<FilmsPage type="movies" />} />
+            <Route path="/tvshows" element={<TvShowsPage type="tv" />} />
             {/* <Route path="/tvshows" Component={TvShowsPage} /> */}
             
           

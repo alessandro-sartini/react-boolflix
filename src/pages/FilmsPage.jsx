@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 export default function FilmsPage({type}) {
   // const [topNewExit, setTopNewExit] = useState([]);
-  const { linkImg, ratingStar, handleTopNew, topNewFilms, setTopNewFilms } =
+  const { linkImg, ratingStar, handleTopNew, topNewProducts, setTopNewProducts } =
     useGlobalContext();
   
   useEffect(() => {
@@ -11,28 +11,11 @@ export default function FilmsPage({type}) {
       handleTopNew("movie");
     }
   }, [type]); 
-  // const url =
-  //   "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
-
-  // const options = {
-  //   method: "GET",
-  //   headers: {
-  //     accept: "application/json",
-  //     Authorization:
-  //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjU2ODAzNjVlZGM5MmQyZTJiMzM3YTUwNjNhZjdhOCIsIm5iZiI6MTc0MTE2Njc3OS42MTIsInN1YiI6IjY3YzgxOGJiOTI2NGFhNTg2NjZlMmU5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6PfhOS1taUZX92Ydw0AdYtQY_0JOqLnnBJWKYzISq0g",
-  //   },
-  // };
-
-  // useEffect(() => {
-  //   fetch(url, options)
-  //     .then((res) => res.json())
-  //     .then((json) => setTopNewExit(json.results))
-  //     .catch((err) => console.error(err));
-  // }, []);
+  
   return (
     <div className="container" style={{ minHeight: "50vh" }}>
       <div className="row row-cols-md-3 row-cols-lg-4 my-3">
-        {topNewFilms.map((e) => (
+        {topNewProducts.map((e) => (
           <div className="mb-4 card-container" key={e.id}>
             <div className="card h-100 empty-card">
               <div
@@ -94,3 +77,22 @@ export default function FilmsPage({type}) {
     </div>
   );
 }
+// ! spostato in api
+  // const url =
+  //   "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+
+  // const options = {
+  //   method: "GET",
+  //   headers: {
+  //     accept: "application/json",
+  //     Authorization:
+  //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MjU2ODAzNjVlZGM5MmQyZTJiMzM3YTUwNjNhZjdhOCIsIm5iZiI6MTc0MTE2Njc3OS42MTIsInN1YiI6IjY3YzgxOGJiOTI2NGFhNTg2NjZlMmU5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6PfhOS1taUZX92Ydw0AdYtQY_0JOqLnnBJWKYzISq0g",
+  //   },
+  // };
+
+  // useEffect(() => {
+  //   fetch(url, options)
+  //     .then((res) => res.json())
+  //     .then((json) => setTopNewExit(json.results))
+  //     .catch((err) => console.error(err));
+  // }, []);

@@ -13,7 +13,7 @@ export default function Header() {
           {/* Logo */}
           <div className="col-md-3 text-center">
             <h1 className="text-danger fs-1 p-2">
-              <a className="text-danger" href="#">Boolix</a>
+              <a className="text-danger" href="/">Boolix</a>
             </h1>
           </div>
 
