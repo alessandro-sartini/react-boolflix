@@ -19,7 +19,7 @@ export default function Header() {
 
           {/* Navbar con link centrati */}
           <div className="col-md-6">
-            <nav className="d-flex justify-content-center">
+            <nav className="d-flex justify-content-center my-3">
               <ul className="nav">
                 <li className="nav-item">
                   <NavLink className="nav-link text-light px-3" to="/">Home</NavLink>
@@ -36,12 +36,12 @@ export default function Header() {
 
           {/* Form di ricerca con input più lungo */}
           <div className="col-md-3">
-            <form className="d-flex justify-content-end" onSubmit={handleSubmit}>
+            <form className="d-flex justify-content-center my-3" onSubmit={handleSubmit}>
               <input
                 type="text"
                 onChange={handleInputChange}
                 placeholder="Cerca un film..."
-                className="m-2 form-control w-75 custom-input"
+                className="m-2 form-control custom-input"
               />
               <button className="btn btn-outline-danger m-2" type="submit">
                 Cerca
