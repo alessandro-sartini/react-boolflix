@@ -1,10 +1,14 @@
 // import { useState } from "react";
 
-import { useGlobalContext } from "../context/GlobalContext";
-import { Link, NavLink } from "react-router-dom";
+// import { useGlobalContext } from "../context/GlobalContext";
+import {  NavLink } from "react-router-dom";
+
+import SearchBar from './pageComponents/SearchBar';
+
+
 
 export default function Header() {
-  const { handleSubmit, handleInputChange } = useGlobalContext();
+  // const { handleSubmit, handleInputChange } = useGlobalContext();
 
   return (
     <header className="shadow bg-dark">
@@ -35,18 +39,9 @@ export default function Header() {
           </div>
 
           {/* Form di ricerca con input più lungo */}
-          <div className="col-md-3">
-            <form className="d-flex justify-content-center my-3" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                onChange={handleInputChange}
-                placeholder="Cerca un film..."
-                className="m-2 form-control custom-input"
-              />
-              <button className="btn btn-outline-danger m-2" type="submit">
-                Cerca
-              </button>
-            </form>
+          <div className="col-md-3 my-3">
+          
+           < SearchBar/>
           </div>
         </div>
       </div>
