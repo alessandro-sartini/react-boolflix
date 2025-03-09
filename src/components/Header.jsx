@@ -3,7 +3,7 @@
 // import { useGlobalContext } from "../context/GlobalContext";
 import {  NavLink } from "react-router-dom";
 
-import SearchBar from './pageComponents/SearchBar';
+import SearchBar from './headerComponent/SearchBar';
 
 
 

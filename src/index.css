@@ -5,11 +5,11 @@ header.shadow {
   z-index: 2;
 }
 
-.active{
-
-    color: #DC3545 !important;
-    box-shadow: 0 0 15px rgba(255, 99, 71, 0.8); 
-    border-radius: 10px;
+/* ! active for navLink */
+.active {
+  color: #dc3545 !important;
+  box-shadow: 0 0 15px rgba(255, 99, 71, 0.8);
+  border-radius: 10px;
 }
 
 h1 a {
@@ -42,7 +42,7 @@ div.sticky {
 }
 
 /* ! tar css */
-span.gold {
+.gold {
   color: gold;
 }
 span.silver {
@@ -58,12 +58,10 @@ span.silver {
 .empty-card {
   width: 100%;
   /* max-height: 98%; */
-
-  /* min-height: 514px; */
+  /*! non va... */
+  /* min-height: 304px; */
   display: none;
   background-color: #343a40;
-
-  
 }
 
 .card-container:hover .full-card {
@@ -72,7 +70,6 @@ span.silver {
 
 .card-container:hover .empty-card {
   display: block;
-  
 }
 h6 {
   margin-top: 1em;

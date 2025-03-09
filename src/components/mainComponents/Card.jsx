@@ -21,7 +21,7 @@ export default function Card({ data, type }) {
           <h6 className="card-subtitle m-2 text-muted">
             titolo originale: {originalTitle}
           </h6>
-          <span className="trama">trama: {data.overview}</span>
+          <span className="trama">trama: {data.overview.length===0?"trama non disponibile":data.overview}</span>
           <span
             className={`my-1 fi fi-${
               data.original_language === "en"

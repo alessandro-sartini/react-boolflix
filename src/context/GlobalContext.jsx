@@ -1,19 +1,17 @@
 import { createContext, useContext, useState } from "react";
-
+import { useEffect } from "react";
 // ! import newTop Function
 import useTopNew from "./hooks/TopNew";
-// ! import oprtions and key 
+// ! import oprtions and key
 import { options, apiUrl } from "../config/apiOptions";
 
-
-import ratingStar from "../utilities/ratingStar"
+import ratingStar from "../utilities/ratingStar";
 
 // Creazione del contesto globale per condividere lo stato tra i componenti
 const GlobalContext = createContext();
 
 // Variabili d'ambiente per configurare l'URL dell'API, la chiave API e il link per le immagini
 const linkImg = import.meta.env.VITE_IMG_LINK;
-
 
 // Definizione del provider del contesto globale, che avvolge i componenti figli
 const GlobalProvider = ({ children }) => {
@@ -23,8 +21,7 @@ const GlobalProvider = ({ children }) => {
   const [films, setFilms] = useState([]);
   // Stato per memorizzare la lista delle serie TV ottenute dalla ricerca
   const [tvShows, setTVShows] = useState([]);
-
-
+  const [highReating, setHighReating] = useState([]);
 
   // Funzione per aggiornare lo stato del termine di ricerca quando l'utente digita
   function handleInputChange(e) {
@@ -46,7 +43,12 @@ const GlobalProvider = ({ children }) => {
       options
     )
       .then((res) => res.json())
-      .then((data) => setFilms(data.results))
+      .then((data) => {
+        const highReatedFilms = data.results.filter((f) => f.vote_average > 7);
+        setHighReating(highReatedFilms);
+
+        setFilms(data.results);
+      })
       .catch((err) => console.error(err));
 
     // Richiesta per le serie TV basata sul termine di ricerca
@@ -55,10 +57,18 @@ const GlobalProvider = ({ children }) => {
       options
     )
       .then((res) => res.json())
-      .then((data) => setTVShows(data.results))
+      .then((data) => {
+        const highReatedTvShows = data.results.filter(
+          (f) => f.vote_average > 7
+        );
+        setHighReating(highReatedTvShows);
+        setTVShows(data.results);
+      })
 
       .catch((err) => console.error("Errore TV:", err));
   }
+
+  console.log(highReating); 
 
 
   const { handleTopNew, topNewProducts, setTopNewProducts } = useTopNew();
@@ -77,6 +87,7 @@ const GlobalProvider = ({ children }) => {
     handleTopNew,
     topNewProducts,
     setTopNewProducts,
+    highReating
   };
 
   // Ritorna il provider del contesto, passando il valore ai componenti figli
@@ -90,20 +101,20 @@ const useGlobalContext = () => useContext(GlobalContext);
 
 // Esportazione del provider e dell'hook per l'uso in altri file
 export { GlobalProvider, useGlobalContext };
-  // // Funzione per convertire una valutazione numerica in un sistema di stelle
-  // function ratingStar(valutazione) {
-  //   const fullStar = "★";
-  //   const emptyStar = "☆";
-  //   const numeroDiStelle = Math.round(valutazione / 2);
-  //   const stampStarFull = fullStar.repeat(numeroDiStelle);
-  //   const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
-  //   const isHighRating = numeroDiStelle > 3;
+// // Funzione per convertire una valutazione numerica in un sistema di stelle
+// function ratingStar(valutazione) {
+//   const fullStar = "★";
+//   const emptyStar = "☆";
+//   const numeroDiStelle = Math.round(valutazione / 2);
+//   const stampStarFull = fullStar.repeat(numeroDiStelle);
+//   const stampStarEmpty = emptyStar.repeat(5 - numeroDiStelle);
+//   const isHighRating = numeroDiStelle > 3;
 
-  //   // Restituisce un elemento span con le stelle e una classe CSS basata sul rating
-  //   return (
-  //     <span className={isHighRating ? "gold" : "silver"}>
-  //       {stampStarFull}
-  //       {stampStarEmpty}
-  //     </span>
-  //   );
-  // }
+//   // Restituisce un elemento span con le stelle e una classe CSS basata sul rating
+//   return (
+//     <span className={isHighRating ? "gold" : "silver"}>
+//       {stampStarFull}
+//       {stampStarEmpty}
+//     </span>
+//   );
+// }
