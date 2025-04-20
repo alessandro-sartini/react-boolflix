@@ -1,8 +1,11 @@
 import { useGlobalContext } from "../../context/GlobalContext";
+
+
 // ! provo location
 import { useLocation } from "react-router-dom";
 
 export default function SearchBar() {
+
   const { handleSubmit, handleInputChange } = useGlobalContext();
   
   //! per ottenere url corrente
@@ -12,6 +15,8 @@ export default function SearchBar() {
     return null
   }
 
+  
+  
   return (
     <form
       className="d-flex justify-content-center "

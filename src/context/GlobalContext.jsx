@@ -23,6 +23,10 @@ const GlobalProvider = ({ children }) => {
   const [tvShows, setTVShows] = useState([]);
   const [highReating, setHighReating] = useState([]);
 
+  
+
+
+
   // Funzione per aggiornare lo stato del termine di ricerca quando l'utente digita
   function handleInputChange(e) {
     setSearchFilms(e.target.value); // Imposta il valore dell'input nello stato
@@ -35,8 +39,13 @@ const GlobalProvider = ({ children }) => {
     handleData(); // Chiama la funzione per recuperare i dati
   }
 
+  
+
+  //  const [loading, setLoading] = useState(false);
   // Funzione per effettuare le richieste API e aggiornare gli stati di film e serie TV
   function handleData() {
+
+
     // Richiesta per i film basata sul termine di ricerca
     fetch(
       `${apiUrl}movie?query=${searchFilm}&include_adult=true&language=it-IT`,
