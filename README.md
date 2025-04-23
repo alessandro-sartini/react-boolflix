@@ -157,10 +157,9 @@ src/
 
 ![Homepage](public/vite.svg)
 
-### Risultati Ricerca
 
 ![Risultati Ricerca](src/assets/react.svg)
 
 ---
 
-Sviluppato con ❤️ da **Boolflix Team**.
+Sviluppato con ❤️ da **Alessandro Sartini**.
